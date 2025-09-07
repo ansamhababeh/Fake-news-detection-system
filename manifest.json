@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "NewsScope Fake News Detector",
+  "version": "1.1",
+  "description": "Highlight text and detect if it's fake news using AI.",
+  "permissions": ["contextMenus", "storage", "activeTab", "scripting"],
+  "host_permissions": ["http://localhost:5000/"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "NewsScope"
+  }
+}

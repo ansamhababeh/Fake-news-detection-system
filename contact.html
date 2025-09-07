@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+
+
+
+    <meta charset="UTF-8">
+    <title>Contact - NewsScope</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+</head>
+
+<!-- ✅ Toast Message -->
+<!-- <div id="toast" class="toast">{{ get_flashed_messages()[0] if get_flashed_messages() else '' }}</div> -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div id="toast" class="toast">{{ messages[0][1] }}</div>
+{% endif %}
+{% endwith %}
+
+<script>
+    const toast = document.getElementById("toast");
+    if (toast) {
+        toast.style.opacity = "1"; // إظهار التوست
+        setTimeout(() => {
+            toast.style.opacity = "0"; // بعد 4 ثواني يبدأ يختفي
+            setTimeout(() => {
+                toast.style.display = "none"; // يخفيه نهائيًا
+            }, 500); // بعد اختفاء تدريجي
+        }, 4000); // التوست يظل ظاهر لمدة 4 ثواني
+    }
+</script>
+
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="NewsScope Logo" class="logo-img">
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+            <li><a href="{{ url_for('daily_news') }}"
+                    class="{% if request.path == '/daily-news' %}active{% endif %}">Daily
+                    News</a></li>
+            <li><a href="{{ url_for('about') }}" class="{% if request.path == '/about' %}active{% endif %}">About Us</a>
+            </li>
+            <li><a href="{{ url_for('contact') }}"
+                    class="{% if request.path == '/contact' %}active{% endif %}">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <section class="contact-wrapper">
+        <!-- Form Section -->
+        <div class="contact-left">
+            <h1>Contact Us</h1>
+            <p>Feel free to reach out. We'll get back to you as soon as we can.</p>
+            <form class="contact-form" method="POST" action="/send-message">
+                <input type="text" name="name" placeholder="Your Name" required />
+                <input type="email" name="email" placeholder="Your Email" required />
+                <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <!-- Info Section -->
+            <div class="contact-right">
+                <h2>Contact Info</h2>
+                <ul class="contact-info">
+                    <li>📧 israajdali9@gmail.com</li>
+                    <li>📞 +972 599 785 833</li>
+                    <li>📍 Birzeit, West Bank</li>
+
+
+                </ul>
+                <div class="contact-social">
+
+                    <a href="https://github.com/israahajali" target="_blank">
+                        <i class="fab fa-github" style="font-size: 28px; color: #ffffff;"></i>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/israa-haj-ali-17a054262/" target="_blank">
+                        <i class="fab fa-linkedin" style="font-size: 28px; color: #ffffff;"></i>
+                    </a>
+
+                    <a href="https://www.facebook.com/israa.haj.ali1492002/" target="_blank">
+                        <i class="fa-brands fa-facebook" style="font-size: 28px; color: #ffffff;"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </section>
+
+</body>
+
+</html>

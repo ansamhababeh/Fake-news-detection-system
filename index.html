@@ -1,0 +1,273 @@
+
+<!-- Updated HTML with Enhancements -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+  <meta charset="UTF-8">
+  <title>NewsScope</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='headline.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='buttons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .modal {
+      z-index: 9999;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .headline-section {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 0 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="NewsScope Logo" class="logo-img">
+    </div>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('home') }}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+      <li><a href="{{ url_for('daily_news') }}" class="{% if request.path == '/daily-news' %}active{% endif %}">Daily
+          News</a></li>
+      <li><a href="{{ url_for('about') }}" class="{% if request.path == '/about' %}active{% endif %}">About Us</a></li>
+      <li><a href="{{ url_for('contact') }}" class="{% if request.path == '/contact' %}active{% endif %}">Contact</a>
+      </li>
+    </ul>
+  </nav>
+
+
+
+
+  <!-- Main Section -->
+  <div class="main-section">
+
+    <div class="headline-titles">
+      <h1 class="headline-title">
+        <span id="typed-text"></span>
+      </h1>
+      <p class="headline-sub">
+        <span id="typed-subtext"></span>
+      </p>
+    </div>
+
+    <!-- الكرت الأبيض فوق الخلفية -->
+    <div class="content-card">
+      <div id="particles-js"></div>
+      <h2>Enter an article:</h2>
+      <textarea id="articleInput" rows="10" placeholder="Write the article here..."></textarea><br>
+      <button id="checkBtn" onclick="sendArticle()">Check</button>
+
+      <!-- Modal -->
+      <div id="resultModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h2>Prediction Result</h2>
+          <div id="modalContent">
+            <p id="modalText"></p>
+            <div id="loader" class="spinner" style="display: none;"></div>
+            <div id="modalExplanation"></div>
+            <canvas id="modalChart" style="display: none;"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Script -->
+  <script>
+    let explanationData = null;
+
+    function sendArticle() {
+      const articleText = document.getElementById("articleInput").value;
+      const checkBtn = document.getElementById("checkBtn");
+
+      document.getElementById("modalText").innerHTML =
+        `<span class="loading-dots">Analyzing<span>.</span><span>.</span><span>.</span></span>`;
+      document.getElementById("modalExplanation").innerHTML = "";
+      document.getElementById("modalChart").style.display = "none";
+      document.getElementById("loader").style.display = "block";
+      document.getElementById("resultModal").style.display = "block";
+
+      checkBtn.disabled = true;
+      checkBtn.innerText = "Checking...";
+
+      fetch("/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ article: articleText })
+      })
+        .then(response => {
+          if (!response.ok) throw new Error("Server error: " + response.status);
+          return response.json();
+        })
+        .then(data => {
+          console.log("🔍 Response:", data);
+
+          if (!data || data.prediction === undefined || data.label === undefined) {
+            throw new Error("Invalid data from server");
+          }
+
+          explanationData = data;
+
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("modalText").innerHTML =
+            `<strong>Prediction:</strong> ${data.label}<br><strong>Score:</strong> ${data.prediction.toFixed(2)}`;
+
+          showExplanationInModal();
+        })
+        .catch(error => {
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("modalText").innerHTML = `<span class="error">Error: ${error.message}</span>`;
+        })
+        .finally(() => {
+          checkBtn.disabled = false;
+          checkBtn.innerText = "Check";
+        });
+    }
+
+    function loadExample() {
+      document.getElementById("articleInput").value = "Breaking: Scientists discover a way to reverse climate change by 2040...";
+    }
+
+    function showExplanationInModal() {
+      const explanationDiv = document.getElementById("modalExplanation");
+      let explanationHTML = '<h3>Explanation (Top Influential Words):</h3>';
+      explanationHTML += '<table><tr><th>Word</th><th>Impact</th><th>Why it matters</th></tr>';
+      explanationData.insights.forEach(item => {
+        const className = item.impact >= 0 ? "positive" : "negative";
+        explanationHTML += `<tr><td>${item.word}</td><td class="${className}">${item.impact.toFixed(3)}</td><td>${item.reason}</td></tr>`;
+      });
+      explanationHTML += '</table>';
+      explanationHTML += `<p class="summary">${explanationData.human_explanation}</p>`;
+      explanationDiv.innerHTML = explanationHTML;
+
+      const ctx = document.getElementById('modalChart').getContext('2d');
+      document.getElementById("modalChart").style.display = "block";
+
+      if (window.explanationChart) {
+        window.explanationChart.destroy();
+      }
+
+      const labels = explanationData.insights.map(i => i.word);
+      const values = explanationData.insights.map(i => i.impact);
+      const backgroundColors = values.map(val =>
+        val >= 0 ? 'rgba(0, 128, 0, 0.6)' : 'rgba(255, 0, 0, 0.6)'
+      );
+
+      window.explanationChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Impact per Word',
+            data: values,
+            backgroundColor: backgroundColors
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: { enabled: true }
+          },
+          scales: {
+            y: { title: { display: true, text: 'Impact' } },
+            x: { title: { display: true, text: 'Word' } }
+          }
+        }
+      });
+    }
+
+    function closeModal() {
+      document.getElementById("resultModal").style.display = "none";
+    }
+  </script>
+
+  <script>
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 100, density: { enable: true, value_area: 700 } },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.4 },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ffffff",
+          opacity: 0.3,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          repulse: { distance: 100, duration: 0.4 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // العنوان الرئيسي
+      new Typed("#typed-text", {
+        strings: ["Let's Find Out the News Authenticity !"],
+        typeSpeed: 20,
+        backSpeed: 25,
+        showCursor: false,
+        smartBackspace: false,
+        loop: false
+      });
+
+      // العنوان الفرعي (يتأخر شوي بعد الأول)
+      setTimeout(function () {
+        new Typed("#typed-subtext", {
+          strings: ["We don't guess. We analyze. Get a trustworthy prediction with explanation."],
+          typeSpeed: 15,
+          backSpeed: 20,
+          showCursor: false,
+          smartBackspace: false,
+          loop: false
+        });
+      }, 1000); // 2.5 ثانية تأخير بعد العنوان الرئيسي
+    });
+  </script>
+
+
+</body>
+
+</html>

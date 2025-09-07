@@ -1,0 +1,224 @@
+/* إعدادات أساسية */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #201162;
+  color: #222;
+  line-height: 1.6;
+}
+.navbar {
+  height: 60px;
+  width: 95%;
+  margin: 20px auto;
+  padding: 0 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: transparent;
+
+  backdrop-filter: none;
+
+  -webkit-backdrop-filter: none;
+
+  border-radius: 0;
+
+  box-shadow: none;
+
+  
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+
+
+
+/* ======== Logo ======== */
+/*.logo {
+  display: flex;
+  align-items: center;
+  
+}*/
+
+.logo-img {
+  height: 85px;
+  /* مناسب ضمن 70px */
+  width: auto;
+  object-fit: contain;
+}
+
+
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  margin-left: 60px; /* ✨ هاي اللي بتزيحو شوي لليمين */
+}
+
+
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  /* 🔄 يخليهم بالنص */
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  /* تاخد المساحة المتبقية وتخليهم بالنص */
+}
+
+
+.nav-links li a {
+  text-decoration: none;
+  /* ✅ يشيل underline */
+  font-size: 15px;
+  color: #ffffff;
+  /* ✅ يخلي اللون أبيض */
+  padding: 8px 16px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+
+.nav-links li a:hover {
+  background-color: transparent;
+  border: 1px solid #66ccff;
+  /* أزرق فاتح */
+  color: #ffffff;
+  font-weight: bold;
+  /*box-shadow: none;*/
+  border-radius: 5px;
+
+  background-color: rgba(255, 255, 255, 0.08);
+  /* تأثير خفيف عند التمرير */
+  border-color: #ffffff;
+  /* خلي الإطار يوضح أكثر */
+  color: #ffffff;
+}
+
+.nav-links li a.active {
+  background-color: transparent;
+  /* شيل الخلفية */
+  border: 1px solid #ffffff;
+  /* خلي فيه إطار أبيض */
+  color: #fff;
+  font-weight: bold;
+  box-shadow: none;
+  border-radius: 5px;
+  /* خلي الحواف ناعمة شوي */
+}
+
+.about-banner {
+  text-align: center;
+  padding: 100px 20px 50px;
+  background: linear-gradient(-45deg, #10106b49, #20208a54, #10106bd9, #1a1a75cf);
+  background-size: 400% 400%;
+  animation: gradientMove 8s ease infinite;
+  border-bottom: 1px solid #eee;
+  color: white;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+.about-banner h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.about-banner p {
+  font-size: 18px;
+  color: #e2e5ffbd;
+}
+
+/* أقسام المحتوى */
+.about-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  padding: 80px 10%;
+  background-color: #ffffff;
+  flex-wrap: wrap;
+}
+
+.about-section.alt {
+  background-color: #edf1fc;
+}
+
+/* النصوص */
+.about-section .text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-section .text h2 {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #10106b;
+}
+
+.about-section .text p {
+  font-size: 16px;
+  color: #1a1a75cf;
+}
+
+/* الصور */
+.about-section .image {
+  flex: 1;
+  text-align: center;
+  padding: 0;            /* ✅ شيل أي padding */
+  margin: -40px;             /* ✅ شيل أي margin */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.about-section .image img {
+  max-width: 50%;
+  height: auto;
+  /* border-radius: 8px; */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.about-section .image img:hover {
+  transform: scale(1.02);
+}
+
+/* استجابة للشاشات الصغيرة */
+@media (max-width: 768px) {
+  .about-section {
+    flex-direction: column;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .about-section .text,
+  .about-section .image {
+    width: 100%;
+  }
+}

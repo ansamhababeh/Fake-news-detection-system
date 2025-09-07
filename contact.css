@@ -1,0 +1,181 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0b0f2a;
+  color: white;
+}
+
+.contact-wrapper {
+  display: flex;
+  
+  max-width: 800px;
+  margin-left: 140px;
+  margin-top: 150px;
+  /* box-shadow: 0 0 30px rgba(0, 0, 0, 0.6); */ /* ❌ شيليه */
+  border-radius: 0px;
+  overflow: visible;  /* ✅ خلي المربعات تبين خارج الإطار لو بدك */
+  
+}
+
+
+
+.contact-left, .contact-right {
+  flex: 1;
+  padding: 40px;
+  
+
+}
+
+.contact-left {
+  background: rgba(255, 255, 255, 0.063);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.212);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(10px);
+  padding-right: 320px; /* ✅ هذا المهم */
+  border-radius: 0px;
+  position: relative;
+}
+
+
+
+
+.contact-left h1 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.contact-left p {
+  color: #cccccc;
+  margin-bottom: 30px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  background-color: #f6f6f610;
+  color: #f6f6f6;
+  border: 1px solid #ffffffa2;
+  border: none;
+  padding: 12px;
+  margin-bottom: 20px;
+  
+  font-size: 15px;
+  border-radius: 6px;
+}
+
+.contact-form button {
+  background-color: #f6f6f610;
+  color: #f6f6f6;
+  border: 1px solid #ffffffa2;    /* 👈 خففنا السمك */
+  padding: 12px 30px;
+  font-size: 17px;
+  /* font-weight: bold; */
+  /* text-transform: uppercase; */
+  letter-spacing: 1.5px;
+  font-family: 'Segoe UI', sans-serif;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #9edcf528;
+  /* box-shadow: 0 6px 18px rgba(102, 204, 255, 0.6); */
+  /* transform: translateY(-2px); */
+}
+
+
+.contact-right {
+  position: absolute;
+  /* align-self: center; */
+
+  top: 155px;
+  right: 20px;
+  width: 280px;
+  padding: 30px;
+  height: 253px;
+  background-color: #050b1fdb;
+  border-radius: 0px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  
+}
+
+
+
+.contact-right h2 {
+  
+  color: #ffffff;
+  margin-bottom: 25px;
+}
+
+.contact-info {
+  list-style: none;
+  padding: 0;
+  line-height: 2;
+  font-size: 15px;
+}
+
+.contact-social {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px; /* ✅ المسافة بين الأيقونات */
+}
+
+.contact-social img {
+  width: 28px;
+  margin-right: 15px;
+  opacity: 0.8;
+  transition: transform 0.3s ease;
+}
+
+.contact-social img:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+
+.flashes {
+  margin: 15px 0;
+  padding: 10px;
+  list-style: none;
+}
+
+.flashes .success {
+  background: linear-gradient(to right, #1e3c72, #2a5298);  /* 💙 خلفية متدرجة */
+  color: #eaf6ff;                                            /* نص أزرق فاتح */
+  border-left: 5px solid #66ccff;                            /* شريط أزرق فاتح */
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);                 /* ظل خفيف */
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+
+.flashes .error {
+  background: #f9c6c9;
+  color: #9d0b0b;
+  border-left: 5px solid #ff4e4e;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #3b82f6;
+  color: #ffffff;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 9999;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - NewsScope</title>
+
+  <!-- خطوط -->
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+</head>
+
+<body>
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="NewsScope Logo" class="logo-img">
+    </div>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('home') }}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+      <li><a href="{{ url_for('daily_news') }}" class="{% if request.path == '/daily-news' %}active{% endif %}">Daily
+          News</a></li>
+      <li><a href="{{ url_for('about') }}" class="{% if request.path == '/about' %}active{% endif %}">About Us</a></li>
+      <li><a href="{{ url_for('contact') }}" class="{% if request.path == '/contact' %}active{% endif %}">Contact</a>
+      </li>
+    </ul>
+  </nav>
+
+
+  <!-- ✅ Banner -->
+  <section class="about-banner">
+    <h1>About Us</h1>
+    <p>Get to know our story, our mission, and the tech behind <strong>NewsScope</strong>.</p>
+  </section>
+
+
+  <!-- ✅ Sections -->
+  <section class="about-section alt">
+    <div class="text">
+      <h2>Our Vision</h2>
+      <p>We are a team of Computer Engineering students from Birzeit University aiming to tackle misleading information
+        through AI.
+      </p>
+    </div>
+    <div class="image">
+      <img src="{{ url_for('static', filename='images/about1.jpg') }}" alt="Vision Image">
+    </div>
+  </section>
+
+  <section class="about-section">
+    <div class="image">
+      <img src="{{ url_for('static', filename='images/about2.jpg') }}" alt="Approach Image">
+    </div>
+    <div class="text">
+      <h2>Our Approach</h2>
+      <p>By leveraging Deep Learning and Natural Language Processing, our system assesses the credibility of online
+        news articles in real-time.</p>
+    </div>
+  </section>
+
+  <section class="about-section alt">
+    <div class="text">
+      <h2>Our Process</h2>
+      <p>From data collection to model training and UI/UX design, our project follows a systematic and ethical
+        development process.</p>
+    </div>
+    <div class="image">
+      <img src="{{ url_for('static', filename='images/about3.jpg') }}" alt="Process Image">
+    </div>
+  </section>
+
+</body>
+
+</html>

@@ -1,0 +1,157 @@
+.news-box-container {
+  position: absolute;
+  top: 180px;
+  left: 120px;
+  width: 750px;
+  max-height: 600px;
+  padding: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.063);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(10px);
+  margin-top: 50px;
+  z-index: 5;
+}
+
+
+.news-box-title {
+  position: absolute;
+  top: 150px;
+  left: 72px;
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  border-bottom: 1px solid #ffffff36;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  margin-left: 50px;
+  z-index: 10;
+}
+
+
+.news-scroll-box {
+  height: 420px;
+  overflow: hidden;
+  position: relative;
+}
+
+.news-scroll-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: scroll-up 60s linear infinite;
+}
+
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+
+
+.news-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 15px;
+}
+
+.news-title {
+  color: #66ccff;
+  text-decoration: none;
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+.source-logo {
+  width: 28px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.label {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-left: 5px;
+  color: white;
+}
+
+.label-real {
+  background-color: #28a745;
+}
+
+.label-fake {
+  background-color: #dc3545;
+}
+
+@keyframes vertical-scroll {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+
+.ticker-item a {
+  color: #66ccff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.source-logo {
+  width: 28px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.label {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-left: 8px;
+  color: white;
+}
+
+.label-real {
+  background-color: #28a745;
+}
+
+.label-fake {
+  background-color: #dc3545;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-250%);
+  }
+}
+
+
+/* عند تمرير الماوس على أي خبر داخل الـ news-scroll-box */
+.news-scroll-box:hover .news-scroll-content {
+  animation-play-state: paused;
+}
+
+/* تأثير hover على الخبر */
+.news-entry:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* لون خلفية خفيف */
+  border-radius: 10px;
+  cursor: pointer;
+  transform: scale(1.01);
+  transition: all 0.3s ease;
+}
+
+/* ولما يخرج الماوس، كل شيء يرجع طبيعي (بالفعل يتم تلقائيًا) */

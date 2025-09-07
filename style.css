@@ -1,0 +1,407 @@
+/* ======== Reset ======== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* ======== Body ======== */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: url("images/background.png") no-repeat center center fixed;
+  background-size: cover;
+  /*background-color: #F2EFE7;*/
+  color: #333;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar {
+  height: 60px;
+  width: 95%;
+  margin: 20px auto;
+  padding: 0 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: transparent;
+
+  backdrop-filter: none;
+
+  -webkit-backdrop-filter: none;
+
+  border-radius: 0;
+
+  box-shadow: none;
+
+  
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+
+
+
+/* ======== Logo ======== */
+/*.logo {
+  display: flex;
+  align-items: center;
+  
+}*/
+
+.logo-img {
+  height: 85px;
+  /* مناسب ضمن 70px */
+  width: auto;
+  object-fit: contain;
+}
+
+
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  margin-left: 60px; /* ✨ هاي اللي بتزيحو شوي لليمين */
+}
+
+
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  /* 🔄 يخليهم بالنص */
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  /* تاخد المساحة المتبقية وتخليهم بالنص */
+}
+
+
+.nav-links li a {
+  text-decoration: none;
+  /* ✅ يشيل underline */
+  font-size: 15px;
+  color: #ffffff;
+  /* ✅ يخلي اللون أبيض */
+  padding: 8px 16px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+
+.nav-links li a:hover {
+  background-color: transparent;
+  border: 1px solid #66ccff;
+  /* أزرق فاتح */
+  color: #ffffff;
+  font-weight: bold;
+  /*box-shadow: none;*/
+  border-radius: 5px;
+
+  background-color: rgba(255, 255, 255, 0.08);
+  /* تأثير خفيف عند التمرير */
+  border-color: #ffffff;
+  /* خلي الإطار يوضح أكثر */
+  color: #ffffff;
+}
+
+.nav-links li a.active {
+  background-color: transparent;
+  /* شيل الخلفية */
+  border: 1px solid #ffffff;
+  /* خلي فيه إطار أبيض */
+  color: #fff;
+  font-weight: bold;
+  box-shadow: none;
+  border-radius: 5px;
+  /* خلي الحواف ناعمة شوي */
+}
+
+
+
+
+.main-section {
+  position: relative;
+  min-height: calc(100vh - 70px);
+  /* بدال height */
+  /*background-color: #F2EFE7;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-top: 120px;
+}
+
+
+/* ======== Headline Titles Above Card ======== */
+.headline-titles {
+  text-align: left;
+  position: absolute;
+  top: 50px;         /* تحت النافبار شوي */
+  left: 165px;         /* مش ملزق على الطرف */
+  z-index: 5;
+}
+
+
+.headline-titles .headline-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.headline-titles .headline-sub {
+  font-size: 15px;
+  color: #cbcbcb;
+  line-height: 1.6;
+}
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none; /* ✅ هذا هو المفتاح */
+}
+
+
+
+.content-card {
+  position: relative;
+  animation: slideInLeft 1s ease-out forwards;
+
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.063);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 35px; /* قللنا البادينغ شوي */
+  border-radius: 10px;
+  width: 500px;        /* كان 600 */
+  max-width: 90%;
+  height: 420px;       /* كان 500 */
+  margin-left: -700px; /* قللنا شوي */
+  margin-top: 100px;
+  /* border: 1px solid #ffffff44; */
+}
+
+
+
+.content-card h2 {
+  margin-bottom: 15px;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+/* ======== Textarea ======== */
+.content-card textarea {
+  width: 100%;
+  height: 240px; /* كان 300 */
+  border: 1px solid #ffffff44;
+  /* الحواف موجودة */
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 15px;
+  background-color: transparent;
+  /* الشفافية الكاملة للخلفية */
+  backdrop-filter: none;
+  /* ما في تغبيش */
+  -webkit-backdrop-filter: none;
+  resize: none;
+  margin-bottom: 15px;
+  color: #ffffff;
+  
+  
+}
+
+.content-card textarea::placeholder {
+  color: #ced0d6;
+  /* deep blue to match your theme */
+  font-style: italic;
+  font-weight: 300;
+}
+
+
+/* ======== Button ======== */
+.content-card button {
+  background-color: transparent;
+  /* 🔄 بدون خلفية */
+  color: #ffffff;
+  /* 🔄 النص أبيض */
+  border: 1px solid #66ccff;
+  /* 🔄 إطار أزرق فاتح */
+  padding: 10px 25px;
+  border-radius: 5px;
+  /* 🔄 زوايا ناعمة مش دائرية */
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.content-card button:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  /* تأثير خفيف عند التمرير */
+  border-color: #ffffff;
+  /* خلي الإطار يوضح أكثر */
+  color: #ffffff;
+}
+
+
+/* ======== Modal (if visible) ======== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 30px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 700px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  color: #444;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #050C9C;
+}
+
+/* ======== Table Explanation ======== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+.summary {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #F2EFE7;
+  border-left: 4px solid #050C9C;
+  font-size: 14px;
+}
+
+/* ======== Responsive (optional) ======== */
+@media (max-width: 768px) {
+  .main-section {
+    flex-direction: column;
+    background-position: center;
+    padding: 20px;
+  }
+
+  .content-card {
+    width: 100%;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+
+
+/* ======== Image beside the card ======== */
+.news-image-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 30px;
+}
+
+/*.news-image-wrapper img {
+  width: 450px;
+  height: auto;
+  border-radius: 0px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  object-fit: cover;
+}*/
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+#typed-text {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 26px;
+  display: inline-block;
+}
+
+.typed-cursor {
+  font-weight: 100;
+  font-size: 28px;
+  color: #66ccff;
+}

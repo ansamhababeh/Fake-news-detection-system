@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NewsScope Popup</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #fafafa; }
+    .spinner {
+      margin: 20px auto;
+      border: 6px solid #eee;
+      border-top: 6px solid #8e24aa;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 8px; text-align: left; border: 1px solid #ccc; }
+    th { background-color: #f8bbd0; color: #4a148c; }
+    .positive { color: #2e7d32; font-weight: bold; }
+    .negative { color: #c62828; font-weight: bold; }
+    .summary { margin-top: 20px; font-style: italic; background: #f3e5f5; padding: 15px; border-left: 5px solid #8e24aa; border-radius: 6px; }
+    #modalChart {
+      margin-top: 30px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      width: 100%;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Analyzing Selected Text...</h2>
+  <div id="loader" class="spinner"></div>
+  <div id="result" style="display:none;">
+    <div id="modalText"></div>
+    <div id="modalExplanation"></div>
+    <canvas id="modalChart"></canvas>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
